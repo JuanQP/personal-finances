@@ -1,0 +1,705 @@
+/* ── Layout ─────────────────────────────────────────────── */
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 1.5rem;
+  margin: 0 -1.5rem 2.5rem;
+  background: var(--header-bg);
+  color: var(--header-text);
+}
+
+.app-title {
+  flex: 1;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--header-text);
+  padding: 1.1rem 0;
+  white-space: nowrap;
+}
+
+.app-nav {
+  display: flex;
+  width: 100%;
+  order: 3;
+  gap: 0;
+  border-top: 1px solid rgba(232,223,200,0.1);
+}
+
+.app-nav a {
+  display: block;
+  padding: 1.1rem 1.1rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(232, 223, 200, 0.6);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.app-nav a:hover {
+  color: var(--header-text);
+}
+
+.app-nav a.active {
+  color: var(--header-text);
+  border-bottom-color: var(--accent, #c8a84b);
+}
+
+.app-nav a.active { border-bottom-color: #c8b97a; }
+
+/* ── Currency toggle ─────────────────────────────────────── */
+
+.currency-toggle {
+  display: flex;
+  border: 1px solid rgba(232, 223, 200, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.currency-toggle button {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(232, 223, 200, 0.55);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.currency-toggle button.active {
+  background: rgba(232, 223, 200, 0.15);
+  color: var(--header-text);
+}
+
+.currency-toggle button:not(.active):hover {
+  color: var(--header-text);
+}
+
+/* ── Section headings ────────────────────────────────────── */
+
+h2 {
+  font-size: 0.72rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  margin: 0 0 0.85rem;
+}
+
+/* ── Dashboard heading ───────────────────────────────────── */
+
+.dashboard-heading {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-heading h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.dashboard-rule {
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Savings note ────────────────────────────────────────── */
+
+.savings-note {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-top: -0.75rem;
+  margin-bottom: 2rem;
+  color: var(--text);
+}
+
+.savings-note strong {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.savings-note.positive strong { color: var(--savings-pos-color); }
+.savings-note.negative strong { color: var(--savings-neg-color); }
+
+/* ── Summary cards ───────────────────────────────────────── */
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: inset 0 0 0 3px var(--bg-card), inset 0 0 0 4px var(--border);
+}
+
+.summary-label {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text);
+}
+
+.summary-amount {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.summary-card.income  { border-color: var(--income-border);      background: var(--income-bg);      box-shadow: inset 0 0 0 3px var(--income-bg),      inset 0 0 0 4px var(--income-border); }
+.summary-card.expense { border-color: var(--expense-border);     background: var(--expense-bg);     box-shadow: inset 0 0 0 3px var(--expense-bg),     inset 0 0 0 4px var(--expense-border); }
+.summary-card.savings.positive { border-color: var(--savings-pos-border); background: var(--savings-pos-bg); box-shadow: inset 0 0 0 3px var(--savings-pos-bg), inset 0 0 0 4px var(--savings-pos-border); }
+.summary-card.savings.negative { border-color: var(--savings-neg-border); background: var(--savings-neg-bg); box-shadow: inset 0 0 0 3px var(--savings-neg-bg), inset 0 0 0 4px var(--savings-neg-border); }
+
+.summary-card.income .summary-amount  { color: var(--income-color); }
+.summary-card.expense .summary-amount { color: var(--expense-color); }
+.summary-card.savings.positive .summary-amount { color: var(--savings-pos-color); }
+.summary-card.savings.negative .summary-amount { color: var(--savings-neg-color); }
+
+/* ── Add entry form ──────────────────────────────────────── */
+
+.entry-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.entry-form input,
+.entry-form select {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg-card);
+  color: var(--text-h);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.entry-form input:focus,
+.entry-form select:focus {
+  border-color: var(--accent);
+}
+
+.entry-form input[type='text']   { flex: 1; min-width: 140px; }
+.entry-form input[type='number'] { width: 130px; }
+.entry-form select               { width: 120px; }
+
+.entry-form button {
+  padding: 0.55rem 1.4rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 3px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.entry-form button:hover { opacity: 0.85; }
+
+/* ── Entries list ────────────────────────────────────────── */
+
+.entries-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  margin-bottom: 0.5rem;
+  background: var(--bg-card);
+}
+
+.entry.income  { border-left-color: var(--income-color); }
+.entry.expense { border-left-color: var(--expense-color); }
+
+.entry-label {
+  flex: 1;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  color: var(--text-h);
+}
+
+.entry-amount {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-h);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ── Inline editing ──────────────────────────────────────── */
+
+.entry.editing {
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+}
+
+.edit-label  { flex: 1; min-width: 0; }
+.edit-amount { width: 100px; flex-shrink: 0; }
+
+.entry.editing input {
+  padding: 0.28rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* ── Row action buttons ──────────────────────────────────── */
+
+.action {
+  background: none;
+  border: none;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.1rem;
+  opacity: 0.3;
+  transition: opacity 0.15s, color 0.15s;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.action:hover           { opacity: 1; }
+.action.save:hover      { color: var(--income-color); opacity: 1; }
+.action.cancel:hover,
+.action.remove:hover    { color: var(--expense-color); opacity: 1; }
+
+/* ── Empty state ─────────────────────────────────────────── */
+
+.empty {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* ── Settings page ───────────────────────────────────────── */
+
+.settings { max-width: 420px; }
+
+.settings-description {
+  color: var(--text);
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.settings-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.settings-form label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-h);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.05rem;
+}
+
+.settings-form input {
+  width: 140px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg-card);
+  color: var(--text-h);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.settings-form input:focus { border-color: var(--accent); }
+
+.settings-form button {
+  padding: 0.55rem 1.4rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 3px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.settings-form button:hover { opacity: 0.85; }
+
+/* ── Dashboard portfolio summary ─────────────────────────── */
+
+.portfolio-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.portfolio-total-label {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text);
+}
+
+.portfolio-total-amount {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* ── Portfolio chart ─────────────────────────────────────── */
+
+.portfolio-chart {
+  margin-top: 1.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.chart-tooltip {
+  background: var(--header-bg);
+  border: 1px solid rgba(232, 223, 200, 0.15);
+  border-radius: 4px;
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.95rem;
+  color: var(--header-text);
+}
+
+.chart-tooltip strong {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+}
+
+/* ── Portfolio page ──────────────────────────────────────── */
+
+.position-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.position-form input {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg-card);
+  color: var(--text-h);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.position-form input:focus { border-color: var(--accent); }
+
+.position-form input:nth-child(1) { width: 90px; }   /* ticker */
+.position-form input:nth-child(2) { flex: 1; min-width: 110px; }  /* price */
+.position-form input:nth-child(3) { width: 100px; }  /* multiplier */
+.position-form input:nth-child(4) { width: 100px; }  /* quantity */
+.position-form input:nth-child(5) { flex: 1; min-width: 120px; }  /* bucket */
+
+.position-form button {
+  padding: 0.55rem 1.4rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 3px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.position-form button:hover { opacity: 0.85; }
+
+.input-locked {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text) !important;
+  cursor: default;
+  font-style: italic;
+}
+
+.prices-section {
+  margin-bottom: 0.5rem;
+}
+
+
+.bucket-section {
+  margin-bottom: 2.5rem;
+}
+
+.bucket-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.bucket-total {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-h);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+}
+
+.positions-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  font-weight: 500;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.positions-table td {
+  padding: 0.5rem 0.6rem;
+  color: var(--text-h);
+  border-bottom: 1px solid rgba(200, 185, 154, 0.35);
+}
+
+.positions-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.positions-table tbody tr:hover td {
+  background: var(--accent-bg);
+}
+
+.col-ticker {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.ticker-description {
+  display: block;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: 0;
+}
+
+.description-input {
+  display: block;
+  margin-top: 0.3rem;
+  width: 100%;
+  font-style: italic;
+}
+
+.col-number, .positions-table th.col-number {
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.col-value, .positions-table th.col-value {
+  text-align: right;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.col-actions {
+  text-align: right;
+  white-space: nowrap;
+  width: 1%;
+}
+
+.position-row.editing td {
+  padding: 0.3rem 0.6rem;
+}
+
+.edit-input {
+  padding: 0.28rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+}
+
+.edit-number { text-align: right; }
+
+/* ── Portfolio history editor ────────────────────────────── */
+
+.history-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.history-description {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text);
+  margin: 0;
+}
+
+.history-description code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.85rem;
+  font-style: normal;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  color: var(--text-h);
+}
+
+.history-textarea {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg-card);
+  color: var(--text-h);
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.history-textarea:focus { border-color: var(--accent); }
+
+.history-error {
+  font-size: 0.875rem;
+  color: var(--expense-color);
+  font-style: italic;
+  margin: 0;
+}
+
+.history-save-btn {
+  align-self: flex-start;
+  padding: 0.55rem 1.4rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 3px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.history-save-btn:hover { opacity: 0.85; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .app-header { padding: 0 1rem; }
+  .col-bucket { display: none; }
+  .app-nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .app-nav::-webkit-scrollbar { display: none; }
+  .app-nav a { flex-shrink: 0; }
+  .summary       { grid-template-columns: 1fr; }
+  .entries-grid  { grid-template-columns: 1fr; }
+  .entry-form input[type='number'],
+  .entry-form select { width: 100%; }
+}

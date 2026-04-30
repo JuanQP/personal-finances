@@ -1,0 +1,69 @@
+:root {
+  --bg:          #f5efe0;
+  --bg-card:     #faf7ef;
+  --text-h:      #1a1408;
+  --text:        #5c4f38;
+  --border:      #c8b99a;
+  --header-bg:   #1a3d2b;
+  --header-text: #e8dfc8;
+  --accent:      #1a4228;
+  --accent-bg:   rgba(26, 66, 40, 0.08);
+  --accent-text: #e8dfc8;
+
+  --income-color:   #1a4228;
+  --income-bg:      rgba(26, 66, 40, 0.06);
+  --income-border:  rgba(26, 66, 40, 0.25);
+
+  --expense-color:  #7a2438;
+  --expense-bg:     rgba(122, 36, 56, 0.06);
+  --expense-border: rgba(122, 36, 56, 0.25);
+
+  --savings-pos-color:  #7a6000;
+  --savings-pos-bg:     rgba(122, 96, 0, 0.06);
+  --savings-pos-border: rgba(122, 96, 0, 0.25);
+
+  --savings-neg-color:  #8b3a1a;
+  --savings-neg-bg:     rgba(139, 58, 26, 0.06);
+  --savings-neg-border: rgba(139, 58, 26, 0.25);
+
+  --serif: 'EB Garamond', 'Georgia', serif;
+  --heading: 'Playfair Display', 'Georgia', serif;
+
+  color-scheme: light;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: url("./assets/guilloche.svg");
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1, h2, h3 {
+  font-family: var(--heading);
+  color: var(--text-h);
+  font-weight: 500;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
