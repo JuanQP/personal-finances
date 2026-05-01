@@ -1,3 +1,33 @@
+/* ── Update banner ───────────────────────────────────────── */
+
+.update-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 1.5rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.9rem;
+}
+
+.update-banner button {
+  background: rgba(232, 223, 200, 0.2);
+  border: 1px solid rgba(232, 223, 200, 0.4);
+  border-radius: 3px;
+  color: var(--accent-text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.update-banner button:hover { background: rgba(232, 223, 200, 0.35); }
+
 /* ── Layout ─────────────────────────────────────────────── */
 
 .app {

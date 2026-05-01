@@ -1,10 +1,22 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
+import { useRegisterSW } from 'virtual:pwa-register/react'
 import { CurrencyProvider, useCurrency } from './context/CurrencyContext'
 import Dashboard from './pages/Dashboard'
 import Entries from './pages/Entries'
 import Portfolio from './pages/Portfolio'
 import Settings from './pages/Settings'
 import './App.css'
+
+function UpdateBanner() {
+  const { needRefresh: [needRefresh], updateServiceWorker } = useRegisterSW()
+  if (!needRefresh) return null
+  return (
+    <div className="update-banner">
+      <span>A new version is available.</span>
+      <button onClick={() => updateServiceWorker(true)}>Reload</button>
+    </div>
+  )
+}
 
 function CurrencyToggle() {
   const { currency, setCurrency } = useCurrency()
@@ -55,6 +67,7 @@ export default function App() {
           <VisibilityToggle />
         </header>
 
+        <UpdateBanner />
         <main className="app-main">
           <Routes>
             <Route path="/" element={<Dashboard />} />
