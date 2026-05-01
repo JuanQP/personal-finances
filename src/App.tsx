@@ -26,6 +26,19 @@ function CurrencyToggle() {
   )
 }
 
+function VisibilityToggle() {
+  const { amountsHidden, toggleAmountsHidden } = useCurrency()
+  return (
+    <button
+      className={`visibility-toggle${amountsHidden ? ' active' : ''}`}
+      onClick={toggleAmountsHidden}
+      title={amountsHidden ? 'Show amounts' : 'Hide amounts'}
+    >
+      {amountsHidden ? '○' : '●'}
+    </button>
+  )
+}
+
 export default function App() {
   return (
     <CurrencyProvider>
@@ -39,6 +52,7 @@ export default function App() {
             <NavLink to="/settings">Settings</NavLink>
           </nav>
           <CurrencyToggle />
+          <VisibilityToggle />
         </header>
 
         <main className="app-main">

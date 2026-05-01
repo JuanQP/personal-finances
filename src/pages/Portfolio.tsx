@@ -268,7 +268,7 @@ export default function Portfolio() {
         </td>
         <td className="col-number">{p.quantity}</td>
         <td className="col-bucket">{p.bucket}</td>
-        <td className="col-value">{fmt(convert(positionValue(p, tickers)))} {currency}</td>
+        <td className="col-value">{fmt(Math.round(convert(positionValue(p, tickers))))} {currency}</td>
         <td className="col-actions">
           <button className="action edit" onClick={() => startEdit(p)} aria-label="Edit">✎</button>
           <button className="action remove" onClick={() => removePosition(p.id)} aria-label="Remove">×</button>
@@ -382,7 +382,7 @@ export default function Portfolio() {
               <section key={bucketName} className="bucket-section">
                 <div className="bucket-header">
                   <h2>{bucketName}</h2>
-                  <span className="bucket-total">{fmt(convert(bucketTotal))} {currency}</span>
+                  <span className="bucket-total">{fmt(Math.round(convert(bucketTotal)))} {currency}</span>
                 </div>
                 <table className="positions-table">
                   <thead>

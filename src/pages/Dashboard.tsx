@@ -59,7 +59,7 @@ export default function Dashboard() {
   const [positions] = useLocalStorage<Position[]>('pf-positions', [])
   const [tickers] = useLocalStorage<Record<string, Ticker>>('pf-tickers', {})
   const [history] = useLocalStorage<HistoricalEntry[]>('pf-portfolio-history', [])
-  const { currency, convert, usdRate } = useCurrency()
+  const { currency, convert, usdRate, amountsHidden } = useCurrency()
 
   const totalIncome = entries
     .filter(e => e.type === 'income')
@@ -123,19 +123,19 @@ export default function Dashboard() {
         <div className="summary-card income">
           <span className="summary-label">Income</span>
           <strong className="summary-amount">
-            <CountUp end={convert(totalIncome)} formattingFn={fmt} duration={1.5} /> {currency}
+            {amountsHidden ? '•••' : <CountUp end={convert(totalIncome)} formattingFn={fmt} duration={1.5} />} {currency}
           </strong>
         </div>
         <div className="summary-card expense">
           <span className="summary-label">Expenses</span>
           <strong className="summary-amount">
-            <CountUp end={convert(totalExpenses)} formattingFn={fmt} duration={1.5} /> {currency}
+            {amountsHidden ? '•••' : <CountUp end={convert(totalExpenses)} formattingFn={fmt} duration={1.5} />} {currency}
           </strong>
         </div>
         <div className={`summary-card savings ${savings >= 0 ? 'positive' : 'negative'}`}>
           <span className="summary-label">Savings</span>
           <strong className="summary-amount">
-            <CountUp end={convert(savings)} formattingFn={fmt} duration={1.5} /> {currency}
+            {amountsHidden ? '•••' : <CountUp end={convert(savings)} formattingFn={fmt} duration={1.5} />} {currency}
           </strong>
         </div>
       </div>
@@ -143,8 +143,8 @@ export default function Dashboard() {
       {savingsPct !== null && (
         <p className={`savings-note ${savings >= 0 ? 'positive' : 'negative'}`}>
           {savings >= 0
-            ? <>You are saving <strong>{savingsPct}%</strong> of your income.</>
-            : <>You are spending <strong>{Math.abs(Number(savingsPct))}%</strong> over your income.</>
+            ? <>You are saving <strong>{amountsHidden ? '•••' : savingsPct}%</strong> of your income.</>
+            : <>You are spending <strong>{amountsHidden ? '•••' : Math.abs(Number(savingsPct))}%</strong> over your income.</>
           }
         </p>
       )}
@@ -157,7 +157,7 @@ export default function Dashboard() {
       <div className="portfolio-summary">
         <span className="portfolio-total-label">Total value</span>
         <strong className="portfolio-total-amount">
-          <CountUp end={Math.round(convert(portfolioTotal))} formattingFn={fmt} duration={1.5} /> {currency}
+          {amountsHidden ? '•••' : <CountUp end={Math.round(convert(portfolioTotal))} formattingFn={fmt} duration={1.5} />} {currency}
         </strong>
       </div>
 
@@ -205,11 +205,11 @@ export default function Dashboard() {
                 tickLine={false}
               />
               <YAxis
-                tickFormatter={v => `$${fmt(v)}`}
+                tickFormatter={amountsHidden ? () => '' : v => `$${fmt(v)}`}
                 tick={{ fontFamily: "'EB Garamond', Georgia, serif", fontSize: 12, fill: 'var(--text)' }}
                 axisLine={false}
                 tickLine={false}
-                width={80}
+                width={amountsHidden ? 16 : 80}
               />
               <Tooltip
                 content={({ payload }) => {
@@ -218,7 +218,7 @@ export default function Dashboard() {
                   return (
                     <div className="chart-tooltip">
                       <strong>{fmtTs(d.ts)}{d.current ? ' · now' : ''}</strong>
-                      <span>${fmt(d.amount)} USD</span>
+                      {!amountsHidden && <span>${fmt(d.amount)} USD</span>}
                     </div>
                   )
                 }}
