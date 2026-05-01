@@ -1,17 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useRef } from 'react'
-import { useCountUp } from 'react-countup'
+import CountUp from 'react-countup'
 import { Treemap, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Dot } from 'recharts'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useCurrency } from '../context/CurrencyContext'
 import { fmt } from '../utils'
 import type { Entry, Position, HistoricalEntry, Ticker } from '../types'
-
-function AnimatedNumber({ end }: { end: number }) {
-  const ref = useRef<HTMLElement>(null)
-  useCountUp({ ref, end, formattingFn: fmt, duration: 1.5 })
-  return <span ref={ref as React.RefObject<HTMLSpanElement>} />
-}
 
 // Warm, muted palette that fits the parchment aesthetic
 const PALETTE = [

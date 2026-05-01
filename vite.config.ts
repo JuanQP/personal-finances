@@ -3,8 +3,12 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  optimizeDeps: {
-    include: ['react-countup'],
+  base: '/personal-finances/',
+  legacy: {
+    // react-countup ships CJS with __esModule:true; Rolldown (Vite 8) changed
+    // interop so the default import resolves to the module object instead of
+    // the component function. Remove once react-countup ships an ESM build.
+    inconsistentCjsInterop: true,
   },
   plugins: [
     react(),

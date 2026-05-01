@@ -25,14 +25,14 @@ Single-page React 19 app. No backend — all state lives in `localStorage`. Reac
 
 ### Data model (`src/types.ts`)
 
-Four types, all persisted independently in localStorage:
+Five types, all persisted independently in localStorage:
 
 | Type | Key | Description |
 |---|---|---|
 | `Entry` | `pf-entries` | Monthly income/expense line items |
-| `Position` | `pf-positions` | Portfolio holdings (ticker, price, multiplier, qty, bucket) |
+| `Position` | `pf-positions` | Portfolio holdings (ticker, qty, bucket) |
+| `Ticker` | `pf-tickers` | Ticker metadata: price, multiplier, optional description |
 | `HistoricalEntry` | `pf-portfolio-history` | Manual USD snapshots for the evolution chart |
-| `Record<string,string>` | `pf-ticker-descriptions` | Optional description per ticker |
 | `Currency` | `pf-currency` | Selected display currency (`'ARS'` \| `'USD'`) |
 | `number` | `pf-usd-rate` | Exchange rate: how many ARS = 1 USD |
 
@@ -52,11 +52,13 @@ Four types, all persisted independently in localStorage:
 
 Four routes: `/` (Dashboard), `/entries` (Entries), `/portfolio` (Portfolio), `/settings` (Settings). `CurrencyProvider` wraps all routes.
 
+### Animated numbers (`react-countup`)
+
+Dashboard numbers (Income, Expenses, Savings, Portfolio total) animate from 0 on page load using `react-countup`. The package ships CJS with `__esModule: true`, which breaks under Vite 8 / Rolldown's new interop behavior. `vite.config.ts` includes `legacy: { inconsistentCjsInterop: true }` to restore the old behavior until `react-countup` ships an ESM build.
+
 ### Key design decisions
 
-**Prices vs. positions**: `price` and `multiplier` are ticker-level attributes stored redundantly on every `Position` row. The Prices panel in Portfolio updates all positions sharing a ticker in one write. When adding a position for an existing ticker, the form locks price/multiplier and reads them from the existing data.
-
-**Ticker descriptions**: stored separately in `pf-ticker-descriptions` (not on positions) since they are pure metadata. Editing is only available through the Prices panel, not the add form.
+**Tickers vs. positions**: `pf-tickers` is an independent store (`Record<string, Ticker>`) that owns `price`, `multiplier`, and `description` for each ticker symbol. `pf-positions` only stores `ticker`, `quantity`, and `bucket`. This separation means the Prices panel works even when there are no holdings. When adding a position for an existing ticker the form locks price/multiplier and reads them from `pf-tickers`. One-time migration code in `Portfolio.tsx` detects old `Position` rows that still carry `price`/`multiplier` and extracts them into `pf-tickers` on first load.
 
 **Portfolio chart data**: the line chart merges `pf-portfolio-history` (manual USD snapshots) with the live current value computed from positions. The X axis uses millisecond timestamps (`scale="time"`) so gaps between irregular snapshots render proportionally.
 
